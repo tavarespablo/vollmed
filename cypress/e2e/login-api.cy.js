@@ -1,7 +1,15 @@
 it('Verifica se as variáveis de ambiente estão carregadas', () => {
-    cy.log('Email:', Cypress.env('email'));
-    cy.log('Senha:', Cypress.env('senha'));
-    cy.log('API Login:', Cypress.env('api_login'));
+    const email = Cypress.env('email');
+    const senha = Cypress.env('senha');
+    const apiLogin = Cypress.env('api_login');
+
+    assert.isString(email, 'Email está definido corretamente');
+    assert.isString(senha, 'Senha está definida corretamente');
+    assert.isString(apiLogin, 'API Login está definido corretamente');
+
+    cy.log('Email:', email);
+    cy.log('Senha:', senha);
+    cy.log('API Login:', apiLogin);
 });
 
 describe('Testes em API', () => {

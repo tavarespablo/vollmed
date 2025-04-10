@@ -28,6 +28,10 @@ Cypress.Commands.add('cadastraEspecialista', (nome, email, senha, especialidade,
 });
 
 Cypress.Commands.add('loginApi', (email, senha) => {
+    // Logando as variáveis para verificar o que está sendo enviado
+    cy.log('Email:', email);
+    cy.log('Senha:', senha);
+
     cy.request({
         method: 'POST',
         url: Cypress.env('api_login'),
@@ -36,10 +40,14 @@ Cypress.Commands.add('loginApi', (email, senha) => {
             senha: senha
         }
     }).then((response) => {
+        // Logando a resposta para depuração
+        cy.log('Response:', JSON.stringify(response.body));
+
         expect(response.status).to.eq(200);
         expect(response.body.auth).to.be.true;
         expect(response.body.rota).to.eq('/clinica');
         expect(response.body.token).to.exist;
+
         cy.wrap(response.body.token).as('token');
     })
 });
