@@ -1,3 +1,9 @@
+it('Verifica se as variáveis de ambiente estão carregadas', () => {
+    cy.log('Email:', Cypress.env('email'));
+    cy.log('Senha:', Cypress.env('senha'));
+    cy.log('API Login:', Cypress.env('api_login'));
+});
+
 describe('Testes em API', () => {
     //caminho feliz
     context('Testes em rotas com usuário autorizado', () => {
@@ -27,6 +33,7 @@ describe('Testes em API', () => {
 
     context('Validações em respostas da API', () => {
         beforeEach(() => {
+            cy.fixture('especialistas.json').as('especialistas');
             cy.loginApi(Cypress.env('email'), Cypress.env('senha'))
         })
 
