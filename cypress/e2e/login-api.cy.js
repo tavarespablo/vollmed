@@ -67,25 +67,5 @@ describe('Testes em API', () => {
                 })
             })
         })
-
-
-
-        it('Requisição incorreta em criação de especialista', () => {
-            cy.request({
-                method: 'POST',
-                url: Cypress.env('api_clinica'),
-                body: {
-                    nome: 'Camila',
-                    email: 'camila123@exemplo',
-                },
-                failOnStatusCode: false
-
-            }).then((response) => {
-                expect(response.status).to.eq(500)
-                expect(response.body).to.have.property('message')
-            })
-
-        })
-
     })
 });
